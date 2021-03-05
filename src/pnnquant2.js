@@ -139,7 +139,7 @@ function create_bin_list(data, format) {
   return bins;
 }
 
-export default function quantize(rgba, maxColors, opts = {}) {
+function quantize(rgba, maxColors, opts = {}) {
   const {
     format = "rgb565",
     clearAlpha = true,
@@ -154,7 +154,7 @@ export default function quantize(rgba, maxColors, opts = {}) {
   if (!(rgba instanceof Uint8Array) && !(rgba instanceof Uint8ClampedArray)) {
     throw new Error('quantize() expected RGBA Uint8Array data');
   }
-  
+
   const data = new Uint32Array(rgba.buffer);
 
   let useSqrt = opts.useSqrt !== false;
@@ -285,6 +285,8 @@ export default function quantize(rgba, maxColors, opts = {}) {
 
   return palette;
 }
+
+export default quantize;
 
 function existsInPalette(palette, color) {
   for (let i = 0; i < palette.length; i++) {
